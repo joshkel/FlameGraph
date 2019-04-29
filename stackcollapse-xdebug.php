@@ -78,11 +78,11 @@ function collapseStack(array $stack, string $func_name_key): string {
     return implode(';', array_column($stack, $func_name_key));
 }
 
-function addCurrentStackToStacks(array $stack, float $dur, array &$stacks) {
+function addCurrentStackToStacks(array &$stack, float $dur, array &$stacks) {
     $collapsed      = implode(';', $stack);
     $duration       = SCALE_FACTOR * $dur;
 
-    if (array_key_exists($collapsed, $stacks)) {
+    if (isset($stacks[$collapsed])) {
         $stacks[$collapsed] += $duration;
     } else {
         $stacks[$collapsed] = $duration;
